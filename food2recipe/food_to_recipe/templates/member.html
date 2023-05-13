@@ -7,9 +7,10 @@
     <title>Food To Recipe</title>
 </head>
 <body>
+    <p>{{request.user}}</p>
     <h1>会員ページ</h1>
     <p><a href="{% url 'food_to_recipe:search-recipe' %}">食材からレシピを探す</a></p>
     <p><a href="{% url 'food_to_recipe:search-recipe' %}">自分の食材を管理する</a></p>
-    <p><a href="{% url 'food_to_recipe:index' %}">ログアウト</a></p>
+    <p><a href="{% url 'food_to_recipe:logout' %}">ログアウト</a></p>
 </body>
 </html>

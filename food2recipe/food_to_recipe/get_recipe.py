@@ -5,8 +5,9 @@ import time
 def get_recipes(word):
     # 検索ワードのID取得
     id_list = get_id_list(word)
+    
     if len(id_list)==0:
-        print("該当するレシピがありませんでした。")
+        return id_list
 
     # 3秒間インターバル
     time.sleep(3)

@@ -5,6 +5,7 @@ from django.views.generic import TemplateView, FormView
 from django.urls import reverse_lazy
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
+from django.contrib.auth.views import LogoutView
 
 
 from .forms import RecipeForm
@@ -22,7 +23,12 @@ def search_recipe(request):
         if form.is_valid():
             input_food = form.cleaned_data['input_food']
             recipe_ranking = get_recipes(input_food)
-            return render(request, 'result.html', {'input_food': input_food, 'recipe_ranking':recipe_ranking})
+            
+            # レシピの結果が見つかったら
+            if len(recipe_ranking)!=0:
+                return render(request, 'result.html', {'input_food': input_food, 'recipe_ranking':recipe_ranking})
+            else:
+                return render(request, 'failure.html')
     else:
         form = RecipeForm()
         return render(request, 'search-recipe.html', {'form': form})
