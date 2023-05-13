@@ -10,7 +10,7 @@ def get_recipes(word):
         return id_list
 
     # 3秒間インターバル
-    time.sleep(3)
+    time.sleep(1)
 
     # ランキング取得
     ranking = get_ranking(id_list)

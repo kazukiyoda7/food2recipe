@@ -12,5 +12,14 @@
     <p><a href="{% url 'food_to_recipe:search-recipe' %}">食材からレシピを探す</a></p>
     <p><a href="{% url 'food_to_recipe:search-recipe' %}">自分の食材を管理する</a></p>
     <p><a href="{% url 'food_to_recipe:logout' %}">ログアウト</a></p>
+
+    <h2>過去の検索履歴</h2>
+    <ol>
+        {% for recipe in history_recipe %}
+            <li>{{ recipe }}</li>
+        {% endfor %}
+    </ol>
+
+    <h2>現在の在庫</h2>
 </body>
 </html>
