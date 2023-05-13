@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food To Recipe</title>
+</head>
+<body>
+    <h1>食材を追加</h1>
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="追加">    
+        </form>
+    <a href="{% url 'food_to_recipe:member' %}">メンバーページに戻る</a>
+</body>
+</html>

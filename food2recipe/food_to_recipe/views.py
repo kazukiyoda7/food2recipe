@@ -1,18 +1,16 @@
 from typing import Any
-from django.db.models.query import QuerySet
-from django.http import HttpResponse
 from django.shortcuts import render
-from django.views.generic import TemplateView, FormView, ListView
+from django.views.generic import TemplateView, FormView, ListView, CreateView
 from django.urls import reverse_lazy
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.contrib.auth.views import LoginView, LogoutView
 
-from .forms import RecipeForm
+from .forms import RecipeForm, MyfoodForm
 
 from .get_recipe import get_recipes
 
-from .models import Recipe
+from .models import Recipe, Myfood
 
 # Create your views here.
 # top page
@@ -60,6 +58,15 @@ class MemberView(ListView):
             queryset = queryset.filter(user=user)
             print(queryset)
         return queryset
+
+def member(request):
+    model1 = Recipe.objects.filter(user=request.user)
+    model2 = Myfood.objects.filter(user=request.user)
+    context = {
+        "recipes":model1,
+        "myfoods":model2,
+    }
+    return render(request, 'member.html', context)
     
 class RegisterView(FormView):
     template_name = "register.html"
@@ -70,4 +77,14 @@ class RegisterView(FormView):
         user = form.save()
         if user is not None:
             login(self.request, user)
+        return super().form_valid(form)
+    
+class AddFoodView(CreateView):
+    model = Myfood
+    form_class = MyfoodForm
+    template_name = "add-food.html"
+    success_url = reverse_lazy("food_to_recipe:member")
+    
+    def form_valid(self, form):
+        form.instance.user = self.request.user
         return super().form_valid(form)
