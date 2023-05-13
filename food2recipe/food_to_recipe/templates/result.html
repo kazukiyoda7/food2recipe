@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    {% comment %} <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> {% endcomment %}
+    <title>Food To Recipe</title>
+</head>
+<body>
+    <h2>{{ input_food }} の検索結果</h2>
+    <ol>
+        {% for recipe in recipe_ranking %}
+            <li>{{ recipe }}</li>
+        {% endfor %}
+    </ol>
+</body>
+</html>

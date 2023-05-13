@@ -1,0 +1,6 @@
+setenv.sh
+
+__pycache__/
+venv_food2recipe/
+
+*.sqlite3
