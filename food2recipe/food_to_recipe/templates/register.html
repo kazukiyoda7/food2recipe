@@ -7,9 +7,14 @@
     <title>Food To Recipe</title>
 </head>
 <body>
-    <h1>あなたの食材を管理し、レシピを提案します。</h1>
+    <h1>ログイン</h1>
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="ログイン">
+    </form>
+    <p>既にアカウントを持っていますか？<p>
     <p><a href="{% url 'food_to_recipe:login' %}">ログイン</a></p>
-    <p>アカウントを持っていませんか？</p>
-    <p><a href="{% url 'food_to_recipe:register' %}">新規登録</a></p>
+    <p><a href="{% url 'food_to_recipe:index' %}">トップページに戻る</a></p>
 </body>
 </html>

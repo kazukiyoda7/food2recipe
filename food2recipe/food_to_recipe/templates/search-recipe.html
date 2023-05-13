@@ -7,13 +7,12 @@
     <title>Food To Recipe</title>
 </head>
 <body>
-    <h2>{{ input_food }} の検索結果</h2>
-    <ol>
-        {% for recipe in recipe_ranking %}
-            <li>{{ recipe }}</li>
-        {% endfor %}
-    </ol>
-    <p><a href="{% url 'food_to_recipe:search-recipe' %}">検索に戻る</a></p>
+    <h1>使いたい食べ物を入力してください</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="送信">
+    </form>
     <p><a href="{% url 'food_to_recipe:member' %}">メンバーページに戻る</a></p>
 </body>
 </html>
