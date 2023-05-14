@@ -1,20 +1,14 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Food To Recipe</title>
-</head>
-<body>
-    <h1>ログイン</h1>
+{% extends 'base.html' %}
+{% block content %}
+
+    <h1>新規登録</h1>
     <form action="" method="POST">
         {% csrf_token %}
         {{ form.as_p }}
-        <input type="submit" value="ログイン">
+        <input type="submit" value="登録">
     </form>
     <p>既にアカウントを持っていますか？<p>
     <p><a href="{% url 'food_to_recipe:login' %}">ログイン</a></p>
     <p><a href="{% url 'food_to_recipe:index' %}">トップページに戻る</a></p>
-</body>
-</html>
+
+{% endblock content %}

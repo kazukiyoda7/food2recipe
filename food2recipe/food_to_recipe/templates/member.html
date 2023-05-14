@@ -1,47 +1,46 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Food To Recipe</title>
-</head>
-<body>
-    <p>{{request.user}}</p>
-    <h1>会員ページ</h1>
-    <h2>食材からレシピを探す</h2>
+{% extends 'base.html' %}
+{% block content %}
+<p>{{request.user}}</p>
+<h2>食材からレシピを探す</h2>
 
-    <form method="POST" action="{% url 'food_to_recipe:search-recipe' %}">
-        {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="送信">
-    </form>
+<form method="POST" action="{% url 'food_to_recipe:search-recipe' %}">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="送信">
+</form>
 
+{% if request.user.is_authenticated %}
+<p><a href="{% url 'food_to_recipe:logout' %}">ログアウト</a></p>
+{% else %}
+<p><a href="{% url 'food_to_recipe:login' %}">ログイン</a></p>
+{% endif %}
 
-    <p><a href="{% url 'food_to_recipe:logout' %}">ログアウト</a></p>
+{% if request.user.is_authenticated %}
+<h2>過去の検索履歴</h2>
+<ol>
+    {% for recipe in recipes %}
+        <li>{{ recipe }}</li>
+    {% endfor %}
+</ol>
+{% endif %}
 
-    <h2>過去の検索履歴</h2>
-    <ol>
-        {% for recipe in recipes %}
-            <li>{{ recipe }}</li>
-        {% endfor %}
-    </ol>
+{% if request.user.is_authenticated %}
+<h2>現在の在庫</h2>
+<ul>
+    {% for myfood in myfoods %}
+        <tr>
+            <li>{{ myfood.food }} - {{ myfood.number }} - {{ myfood.createdDate }}</li>
+        </tr>
+        <tr>
+            <a href="{% url 'food_to_recipe:edit' myfood.pk %}">編集</a>
+        </tr>
+        <tr>
+            <a href="{% url 'food_to_recipe:delete' myfood.pk %}">削除</a>
+        </tr>
 
-    <h2>現在の在庫</h2>
-    <ul>
-        {% for myfood in myfoods %}
-            <tr>
-                <li>{{ myfood.food }} - {{ myfood.number }} - {{ myfood.createdDate }}</li>
-            </tr>
-            <tr>
-                <a href="{% url 'food_to_recipe:edit' myfood.pk %}">編集</a>
-            </tr>
-            <tr>
-                <a href="{% url 'food_to_recipe:delete' myfood.pk %}">削除</a>
-            </tr>
+    {% endfor %}
+</ul>
+<p><a href="{% url 'food_to_recipe:add-food' %}">追加</a></p>
+{% endif %}
 
-        {% endfor %}
-    </ul>
-    <p><a href="{% url 'food_to_recipe:add-food' %}">追加</a></p>
-</body>
-</html>
+{% endblock content %}

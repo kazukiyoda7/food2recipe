@@ -1,18 +1,12 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    {% comment %} <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> {% endcomment %}
-    <title>Food To Recipe</title>
-</head>
-<body>
-    <h1>使いたい食べ物を入力してください</h1>
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="送信">
-    </form>
-    <p><a href="{% url 'food_to_recipe:member' %}">メンバーページに戻る</a></p>
-</body>
-</html>
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>使いたい食べ物を入力してください</h1>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="送信">
+</form>
+<p><a href="{% url 'food_to_recipe:index' %}">戻る</a></p>
+
+{% endblock content %}

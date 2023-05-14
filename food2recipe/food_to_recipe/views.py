@@ -14,8 +14,24 @@ from .models import Recipe, Myfood
 
 # Create your views here.
 # top page
-class IndexView(TemplateView):
-    template_name = 'index.html'
+def index(request):
+    form = RecipeForm
+    if request.user.is_authenticated:
+        model1 = Recipe.objects.filter(user=request.user)
+        model1 = model1.order_by('-pk')[:5]
+        model2 = Myfood.objects.filter(user=request.user)
+        form = RecipeForm
+        context = {
+            "recipes":model1,
+            "myfoods":model2,
+            "form":form,
+        }
+        return render(request, 'index.html', context)
+    else:
+        context = {
+            "form":form,
+        }
+        return render(request, 'index.html', context)
     
 def search_recipe(request):
     form = RecipeForm(request.POST)
@@ -42,19 +58,8 @@ class RecipeLoginView(LoginView):
     template_name = "login.html"
     
     def get_success_url(self):
-        return reverse_lazy("food_to_recipe:member")
+        return reverse_lazy("food_to_recipe:index")
 
-def member(request):
-    model1 = Recipe.objects.filter(user=request.user)
-    model1 = model1.order_by('-pk')[:5]
-    model2 = Myfood.objects.filter(user=request.user)
-    form = RecipeForm
-    context = {
-        "recipes":model1,
-        "myfoods":model2,
-        "form":form,
-    }
-    return render(request, 'member.html', context)
     
 class RegisterView(FormView):
     template_name = "register.html"
@@ -71,7 +76,7 @@ class AddFoodView(CreateView):
     model = Myfood
     form_class = MyfoodForm
     template_name = "add-food.html"
-    success_url = reverse_lazy("food_to_recipe:member")
+    success_url = reverse_lazy("food_to_recipe:index")
     
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -82,9 +87,9 @@ class EditView(UpdateView):
     model = Myfood
     form_class = MyfoodForm
     template_name = "add-food.html"
-    success_url = reverse_lazy("food_to_recipe:member")
+    success_url = reverse_lazy("food_to_recipe:index")
 
 class DeleteView(DeleteView):
     model = Myfood
     template_name = "delete.html"
-    success_url = reverse_lazy("food_to_recipe:member")
+    success_url = reverse_lazy("food_to_recipe:index")
