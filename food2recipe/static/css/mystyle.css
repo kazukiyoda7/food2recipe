@@ -38,7 +38,7 @@ div.history{
     margin: 10px 0 0 10px;
 }
 
-div.stock{
+.stock{
     background-color: #b9b9b9;
     margin: 1em auto 0;
     width: 65%;
@@ -46,6 +46,7 @@ div.stock{
     margin-right: 5%;
     box-sizing: border-box;
     position: relative;
+    padding-bottom: 20px; 
 }
 
 .stock h3{
@@ -86,7 +87,7 @@ div.stock li{
     padding: 10px;
 }
 
-input{
+.my-div-style input{
     width: 70%;
     margin: 0 10px;
 }
@@ -104,3 +105,66 @@ div.mywapper{
     overflow: hidden;
 }
 
+.add-food{
+    background-color: #b9b9b9;
+    margin: 100px 1000px 0 20px;
+    padding: 20px 0 20px 20px;
+}
+
+.add-food-container{
+    margin:0 0 0 10px;
+}
+
+.add-form{
+    display: inline;
+}
+
+.delete-form{
+    background-color: #b9b9b9;
+    margin: 100px 1000px 0 20px;
+    padding: 20px 0 20px 20px;
+}
+
+.login{
+    background-color: #b9b9b9;
+    margin: 100px 1000px 0 20px;
+    padding: 20px 0 20px 20px;
+}
+
+.login input {
+    margin: 2px 0;
+}
+
+.failure {
+    background-color: #b9b9b9;
+    margin: 100px 1000px 0 20px;
+    padding: 20px 0 20px 20px;
+}
+
+.failure p{
+    margin-top: 20px;
+}
+
+.anonymous{
+    margin-top: 50px;
+}
+
+.register{
+    background-color: #b9b9b9;
+    margin: 100px 100px 0 20px;
+    padding: 20px 0 20px 20px;
+}
+
+.have-account{
+    margin-top: 50px;
+}
+
+
+/* 共通項目 */
+input{
+    border: 2px solid black;
+}
+
+button{
+    border: 2px solid black;
+}

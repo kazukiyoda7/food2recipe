@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>レシピが見つかりませんでした</h1>
-<p><a href="{% url 'food_to_recipe:index' %}">戻る</a></p>
+<div class="failure">
+    <h2>Sorry. Couldn't find the recipe.</h2>
+    <p><a href="{% url 'food_to_recipe:index' %}"><button type="button">back</button></a></p>
+</div>
 
 {% endblock content %}

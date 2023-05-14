@@ -1,12 +1,18 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>食材を追加</h1>
-    <form action="" method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="追加">    
-    </form>
-<a href="{% url 'food_to_recipe:index' %}">戻る</a>
+<div class="add-food">
+    <div class="add-food-container">
+        <h2>Add Your Food</h2>
+        <div class="add-form">
+            <form action="" method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="Add">    
+                <a href="{% url 'food_to_recipe:index' %}"><button type="button">back</button></a>
+            </form>
+        </div>
+    </div>
+</div>
 
 {% endblock content %}

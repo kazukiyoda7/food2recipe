@@ -24,16 +24,14 @@
     </div>
 
     <div class="mywapper">
+        {% if request.user.is_authenticated %}
         <div class="stock">
-            {% if request.user.is_authenticated %}
             <h3>Stock</h3>
             <table>
                 <tr>
                     <th>name</th>
                     <th>number</th>
                     <th>date</th>
-                    <th>edit</th>
-                    <th>delete</th>
                 </tr>
                 {% for myfood in myfoods %}
                 <tr>
@@ -48,11 +46,11 @@
             <div class="add">
                 <a href="{% url 'food_to_recipe:add-food' %}"><button type=button>add</button></a>
             </div>    
-            {% endif %}
         </div>
-
+        {% endif %}
+        
+        {% if request.user.is_authenticated %}
         <div class="history">
-            {% if request.user.is_authenticated %}
             <h3>Search History</h3>
             <table>
             {% for recipe in recipes %}
@@ -61,8 +59,8 @@
                 </tr>
             {% endfor %}
             </table>
-            {% endif %}
         </div>
+        {% endif %}
 
 </div>
 {% endblock content %}

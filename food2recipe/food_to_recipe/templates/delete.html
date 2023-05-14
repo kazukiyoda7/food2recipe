@@ -1,11 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<form method="POST">
-    {% csrf_token %}
-    <p>{{object}}を本当に削除しますか？</p>
-    <input type="submit" value="削除">
-</form>
-<p><a href="{% url 'food_to_recipe:index' %}">戻る</a></p>
+<div class="delete-form">
+    <form method="POST">
+        {% csrf_token %}
+        <p>{{object}}を本当に削除しますか？</p>
+        <input type="submit" value="delete">
+        <a href="{% url 'food_to_recipe:index' %}"><button type="button">back</button></a>
+    </form>
+</div>
 
 {% endblock content %}
