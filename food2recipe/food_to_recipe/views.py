@@ -1,6 +1,6 @@
 from typing import Any
 from django.shortcuts import render
-from django.views.generic import TemplateView, FormView, ListView, CreateView
+from django.views.generic import TemplateView, FormView, ListView, CreateView, DetailView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
@@ -88,3 +88,15 @@ class AddFoodView(CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
+    
+    
+class EditView(UpdateView):
+    model = Myfood
+    form_class = MyfoodForm
+    template_name = "add-food.html"
+    success_url = reverse_lazy("food_to_recipe:member")
+
+class DeleteView(DeleteView):
+    model = Myfood
+    template_name = "delete.html"
+    success_url = reverse_lazy("food_to_recipe:member")

@@ -22,10 +22,18 @@
     <h2>現在の在庫</h2>
     <ul>
         {% for myfood in myfoods %}
-            <li>{{ myfood.food }} - {{ myfood.number }}</li>
+            <tr>
+                <li>{{ myfood.food }} - {{ myfood.number }}</li>
+            </tr>
+            <tr>
+                <a href="{% url 'food_to_recipe:edit' myfood.pk %}">編集</a>
+            </tr>
+            <tr>
+                <a href="{% url 'food_to_recipe:delete' myfood.pk %}">削除</a>
+            </tr>
+
         {% endfor %}
     </ul>
     <p><a href="{% url 'food_to_recipe:add-food' %}">追加</a></p>
-    <p><a href="{% url 'food_to_recipe:logout' %}">編集</a></p>
 </body>
 </html>
