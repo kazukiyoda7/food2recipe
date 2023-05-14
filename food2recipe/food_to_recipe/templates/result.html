@@ -1,12 +1,27 @@
 {% extends 'base.html' %}
 {% block content %}
 
-    <h2>{{ input_food }} の検索結果</h2>
-    <ol>
+<div class="result">
+    <h2>Search results for "{{ input_food }}"</h2>
+    <table>
+        <tr>
+            <th>image</th>
+            <th>title</th>
+            <th>time</th>
+            <th>cost</th>
+            <th>url</th>
+        </tr>
         {% for recipe in recipe_ranking %}
-            <li>{{ recipe }}</li>
+        <tr>
+            <td><img src="{{ recipe.smallImageUrl }}"></td>
+            <td>{{ recipe.recipeTitle }}</td>
+            <td>{{ recipe.recipeIndication }}</td>
+            <td>{{ recipe.recipeCost }}</td>
+            <td><a href="{{ recipe.recipeUrl }}"><button tyspe="button">Go recipe</button></a></td>
+        </tr>
         {% endfor %}
-    </ol>
-    <p><a href="{% url 'food_to_recipe:index' %}">戻る</a></p>
+    </table>
+    <p><a href="{% url 'food_to_recipe:index' %}"><button type="button">back</button></a></p>
+</div>
 
 {% endblock content %}
