@@ -41,11 +41,12 @@ def search_recipe(request):
         
         # レシピの結果が見つかったら
         if len(recipe_ranking)!=0:
-            recipe = Recipe(
-                user = request.user,
-                food = input_food,
-            )
-            recipe.save()
+            if request.user.is_authenticated:
+                recipe = Recipe(
+                    user = request.user,
+                    food = input_food,
+                )
+                recipe.save()
             return render(request, 'result.html', {'input_food': input_food, 'recipe_ranking':recipe_ranking})
         else:
             return render(request, 'failure.html')

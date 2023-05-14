@@ -1,46 +1,68 @@
 {% extends 'base.html' %}
 {% block content %}
-<p>{{request.user}}</p>
-<h2>食材からレシピを探す</h2>
 
-<form method="POST" action="{% url 'food_to_recipe:search-recipe' %}">
-    {% csrf_token %}
-    {{ form }}
-    <input type="submit" value="送信">
-</form>
+<div class="container">
 
-{% if request.user.is_authenticated %}
-<p><a href="{% url 'food_to_recipe:logout' %}">ログアウト</a></p>
-{% else %}
-<p><a href="{% url 'food_to_recipe:login' %}">ログイン</a></p>
-{% endif %}
+    <div class="my-div-style">
+        <h2>Search for recipes by food</h2>
+        <div class="form-horizontal">
+            <form method="POST" action="{% url 'food_to_recipe:search-recipe' %}">
+                {% csrf_token %}
+                {{ form.non_field_errors }}
+                {% for field in form%}
+                <div class="mb-4 col-8">
+                    <label for="{{ field.id_for_label }}", class="form-label">
+                        {% comment %} <strong>{{field.label_tag}}</strong> {% endcomment %}
+                    </label>
+                    {{ field }}
+                    {{ field.errors}}
+                </div>
+                {% endfor %}
+                <button type="submit"><i class="fas fa-search"></i></button>
+            </form>
+        </div>
+    </div>
 
-{% if request.user.is_authenticated %}
-<h2>過去の検索履歴</h2>
-<ol>
-    {% for recipe in recipes %}
-        <li>{{ recipe }}</li>
-    {% endfor %}
-</ol>
-{% endif %}
+    <div class="mywapper">
+        <div class="stock">
+            {% if request.user.is_authenticated %}
+            <h3>Stock</h3>
+            <table>
+                <tr>
+                    <th>name</th>
+                    <th>number</th>
+                    <th>date</th>
+                    <th>edit</th>
+                    <th>delete</th>
+                </tr>
+                {% for myfood in myfoods %}
+                <tr>
+                    <td>{{ myfood.food }}</td>
+                    <td>{{ myfood.number }}</td>
+                    <td>{{ myfood.createdDate }}</td>
+                    <td><a href="{% url 'food_to_recipe:edit' myfood.pk %}"><span class="edit"><button type=button>edit</button></span></a></td> 
+                    <td><a href="{% url 'food_to_recipe:delete' myfood.pk %}"><span class="edit"><button type=button>delete</button></span></a></td>
+                </tr>
+                {% endfor %}
+            </table>
+            <div class="add">
+                <a href="{% url 'food_to_recipe:add-food' %}"><button type=button>add</button></a>
+            </div>    
+            {% endif %}
+        </div>
 
-{% if request.user.is_authenticated %}
-<h2>現在の在庫</h2>
-<ul>
-    {% for myfood in myfoods %}
-        <tr>
-            <li>{{ myfood.food }} - {{ myfood.number }} - {{ myfood.createdDate }}</li>
-        </tr>
-        <tr>
-            <a href="{% url 'food_to_recipe:edit' myfood.pk %}">編集</a>
-        </tr>
-        <tr>
-            <a href="{% url 'food_to_recipe:delete' myfood.pk %}">削除</a>
-        </tr>
+        <div class="history">
+            {% if request.user.is_authenticated %}
+            <h3>Search History</h3>
+            <table>
+            {% for recipe in recipes %}
+                <tr>
+                    <td>{{ recipe.food }}</td>
+                </tr>
+            {% endfor %}
+            </table>
+            {% endif %}
+        </div>
 
-    {% endfor %}
-</ul>
-<p><a href="{% url 'food_to_recipe:add-food' %}">追加</a></p>
-{% endif %}
-
+</div>
 {% endblock content %}

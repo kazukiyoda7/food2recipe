@@ -1,0 +1,106 @@
+body#wapper{
+    display: flex;
+    flex-direction: colum;
+    min-height: 100vh;
+}
+
+footer{
+    margin-top: auto;
+}
+
+.my-div-style h2{
+    margin: 10px 0 0 10px;
+}
+
+div.my-div-style{
+    background-color: #b9b9b9;
+    margin: 100px auto 2rem;
+    padding: 5px 0 10px;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+}
+
+div.history{
+    background-color: #b9b9b9;
+    margin: 1em auto 0;
+    width: 30%;
+    float: left;
+    box-sizing: border-box;
+}
+
+.history h3 {
+    margin: 10px 0 0 10px;
+}
+
+div.stock{
+    background-color: #b9b9b9;
+    margin: 1em auto 0;
+    width: 65%;
+    float: left;
+    margin-right: 5%;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.stock h3{
+    margin: 10px 0 0 10px;
+}
+
+div.stock li{
+    display: inline;
+}
+
+
+.stock table{
+    border-collapse: collapse;
+    width: 100%;
+}
+
+
+.stock th, .stock td{
+    padding: 10px;
+    text-align: center;
+}
+
+.add{
+    margin-top: 50px;
+    text-align: center;
+}
+
+.add button{
+    width: 50%;
+}
+
+.history table{
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.history td{
+    padding: 10px;
+}
+
+input{
+    width: 70%;
+    margin: 0 10px;
+}
+
+form div{
+    display: inline;
+}
+
+div.form-horizontal{
+    margin: 20px 0;
+}
+
+div.mywapper{
+    width: 100%;
+    overflow: hidden;
+}
+
