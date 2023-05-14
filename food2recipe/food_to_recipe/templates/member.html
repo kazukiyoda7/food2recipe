@@ -9,7 +9,15 @@
 <body>
     <p>{{request.user}}</p>
     <h1>会員ページ</h1>
-    <p><a href="{% url 'food_to_recipe:search-recipe' %}">食材からレシピを探す</a></p>
+    <h2>食材からレシピを探す</h2>
+
+    <form method="POST" action="{% url 'food_to_recipe:search-recipe' %}">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="送信">
+    </form>
+
+
     <p><a href="{% url 'food_to_recipe:logout' %}">ログアウト</a></p>
 
     <h2>過去の検索履歴</h2>
@@ -23,7 +31,7 @@
     <ul>
         {% for myfood in myfoods %}
             <tr>
-                <li>{{ myfood.food }} - {{ myfood.number }}</li>
+                <li>{{ myfood.food }} - {{ myfood.number }} - {{ myfood.createdDate }}</li>
             </tr>
             <tr>
                 <a href="{% url 'food_to_recipe:edit' myfood.pk %}">編集</a>

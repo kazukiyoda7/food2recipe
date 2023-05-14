@@ -18,25 +18,23 @@ class IndexView(TemplateView):
     template_name = 'index.html'
     
 def search_recipe(request):
-    if request.method == 'POST':
-        form = RecipeForm(request.POST)
-        if form.is_valid():
-            input_food = form.cleaned_data['input_food']
-            recipe_ranking = get_recipes(input_food)
-            
-            # レシピの結果が見つかったら
-            if len(recipe_ranking)!=0:
-                recipe = Recipe(
-                    user = request.user,
-                    food = input_food,
-                )
-                recipe.save()
-                return render(request, 'result.html', {'input_food': input_food, 'recipe_ranking':recipe_ranking})
-            else:
-                return render(request, 'failure.html')
-    else:
-        form = RecipeForm()
-        return render(request, 'search-recipe.html', {'form': form})
+    form = RecipeForm(request.POST)
+    if form.is_valid():
+        input_food = form.cleaned_data['input_food']
+        recipe_ranking = get_recipes(input_food)
+        
+        # レシピの結果が見つかったら
+        if len(recipe_ranking)!=0:
+            recipe = Recipe(
+                user = request.user,
+                food = input_food,
+            )
+            recipe.save()
+            return render(request, 'result.html', {'input_food': input_food, 'recipe_ranking':recipe_ranking})
+        else:
+            return render(request, 'failure.html')
+    return render(request, 'failure.html')
+
 
 
 class RecipeLoginView(LoginView):
@@ -45,26 +43,16 @@ class RecipeLoginView(LoginView):
     
     def get_success_url(self):
         return reverse_lazy("food_to_recipe:member")
-    
-class MemberView(ListView):
-    model = Recipe
-    template_name = "member.html"
-    context_object_name = "history_recipe"
-    
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        user = self.request.user
-        if user.is_authenticated:
-            queryset = queryset.filter(user=user)
-            print(queryset)
-        return queryset
 
 def member(request):
     model1 = Recipe.objects.filter(user=request.user)
+    model1 = model1.order_by('-pk')[:5]
     model2 = Myfood.objects.filter(user=request.user)
+    form = RecipeForm
     context = {
         "recipes":model1,
         "myfoods":model2,
+        "form":form,
     }
     return render(request, 'member.html', context)
     

@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 class Recipe(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     food = models.CharField(max_length=50)
-    createdDate = models.DateTimeField(auto_now=True)
+    createdDate = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
         return self.food
@@ -18,7 +18,7 @@ class Myfood(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     food = models.CharField(verbose_name="食材", max_length=50, blank=False)
     number = models.IntegerField(verbose_name="個数", default=1)
-    createdDate = models.DateTimeField(auto_now=True)
+    createdDate = models.DateTimeField(verbose_name="日時" ,auto_now_add=True)
 
     class Meta:
         ordering = ["createdDate"]

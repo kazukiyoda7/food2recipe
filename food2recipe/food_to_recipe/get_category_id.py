@@ -16,7 +16,8 @@ def get_id_list(word):
     }
 
     response = requests.get(url, params=params)    
-    response_check(response)
+    if response_check(response)!=200:
+        return []
 
     json_data = response.json()
     result = json_data["result"]["small"]

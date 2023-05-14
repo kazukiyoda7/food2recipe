@@ -3,9 +3,10 @@ import re
 def response_check(response):
     if response.status_code == 200:
         print("OK: 200")
+        return 200
     else:
         print(f"Error: {response.status_code}")
-        exit(1)
+        return 0
     
 
 def get_category_id_list(result, word):
