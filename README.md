@@ -1,9 +1,12 @@
 # Food To Recipe
+![Untitled (26)](https://github.com/kazukiyoda7/food2recipe/assets/96679679/ebf00b75-f807-432b-9871-0a30f42fea83)
 
 ## 主な機能
 
 1. 食材の管理：自分の食材の基本情報を管理
-2. 人気レシピの検索：手持ちの食材を把握しながら人気レシピを検索
+2. ![Untitled (27)](https://github.com/kazukiyoda7/food2recipe/assets/96679679/3c1306cb-3026-47f0-96e5-4a3f8ea2792d)
+3. 人気レシピの検索：手持ちの食材を把握しながら人気レシピを検索
+![Untitled (28)](https://github.com/kazukiyoda7/food2recipe/assets/96679679/a05b9bd8-c196-4cb6-acd4-427f6f4c0fd9)
 
 ## 検索機能の概要
 ![検索機能の概要](https://github.com/kazukiyoda7/food2recipe/assets/96679679/eb980faf-f46c-4c3f-a1cd-ffd97808e332)
